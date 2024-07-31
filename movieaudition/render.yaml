@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: my-django-app
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn movieaudition.wsgi
+    plan: free
+    regions:
+      - oregon

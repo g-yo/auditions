@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <script>
+        function calculateAge() {
+            var dob = document.getElementById('id_date_of_birth').value;
+            var dobDate = new Date(dob);
+            var age = new Date().getFullYear() - dobDate.getFullYear();
+            var m = new Date().getMonth() - dobDate.getMonth();
+            if (m < 0 || (m === 0 && new Date().getDate() < dobDate.getDate())) {
+                age--;
+            }
+            document.getElementById('age_display').innerText = 'Age: ' + age;
+        }
+    </script>
+</head>
+<body>
+    <h2>Register</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p id="age_display"></p>
+        <button type="submit">Register</button>
+    </form>
+    <script>
+        document.getElementById('id_date_of_birth').addEventListener('change', calculateAge);
+    </script>
+</body>
+</html>

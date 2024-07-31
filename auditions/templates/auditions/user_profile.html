@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile - ACTRS</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- FontAwesome CDN -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background: white;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #000;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            color: #000000 !important; /* Black color */
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-header img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #ff0000; /* Red border */
+        }
+
+        .profile-header h2 {
+            margin-top: 10px;
+            color: #000;
+        }
+
+        .profile-header p {
+            color: rgba(0, 0, 0, 0.5); /* 50% opacity for username */
+            margin: 5px 0;
+        }
+
+        .profile-content {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-content p {
+            margin: 5px 0;
+            color: #000;
+        }
+
+        .profile-content .red-line {
+            height: 3px;
+            background-color: #ff0000;
+            margin: 20px auto 0;
+            width: 100px; /* Adjust width as needed */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        .btn-red {
+            background-color: #ff0000;
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn-red:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">ACTRS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'user_profile' %}">
+                            <i class="fas fa-user"></i> <!-- Profile icon -->
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'user_logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'userlogin' %}">Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="profile-header">
+            <img src="{{ user.profile_image.url }}" alt="Profile Image">
+            <h2>{{ user.full_name }}</h2>
+            <p>{{ user.username }}</p>
+        </div>
+        <div class="profile-content">
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Date of Birth:</strong> {{ user.date_of_birth }}</p>
+            <p><strong>Registration Date:</strong> {{ user.date_joined|date:"F j, Y" }}</p> <!-- Registration date -->
+            <div class="red-line"></div> <!-- Red line under content -->
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Apply for {{ movie.name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9; /* Light gray background */
+            color: #333; /* Dark gray text */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff; /* White background */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        h1 {
+            color: #007bff; /* Blue color for the title */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin: 0;
+            padding: 0;
+        }
+
+        form p {
+            margin: 15px 0;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 1.1em;
+            color: #ffffff;
+            background-color: #007bff; /* Blue color */
+            border: none;
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Apply for {{ movie.name }}</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit Application</button>
+        </form>
+    </div>
+</body>
+</html>
